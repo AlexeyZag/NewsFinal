@@ -4,7 +4,9 @@ from django.contrib.auth.models import Group
 from .models import CustomUser
 from django.forms import TextInput, PasswordInput, EmailInput, DateTimeInput, DateField
 from django.forms import ModelForm
+from django import forms
 
+from django.forms.widgets import ClearableFileInput, FileInput
 
 # Метод переопределяет форму регистрации через allauth. Достаем пользователя из реквест, достаем группу
 # common через гет, в эту группу добавляем пользователя
@@ -20,9 +22,10 @@ class BasicSignupForm(SignupForm):
 
 # Форма редактирования профиля пользователя
 class EditForm(ModelForm):
+    avatar = forms.ImageField(label='Ваше фото', required=False, widget=FileInput)
     class Meta:
         model = CustomUser
-        fields = ['username', 'first_name', 'last_name', 'date_of_birth','email',]
+        fields = ['username', 'first_name', 'last_name', 'date_of_birth','email', 'avatar']
 
         widgets = {
             'username': TextInput(attrs={

@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-xl-4 mx-auto">
-            <form style="text-align: center;" method="POST">
+            <form style="text-align: center;" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h4 style="text-align: center;">Логин</h4>
                 {{ form.username }}
@@ -21,7 +21,8 @@
                 <input type="date" placeholder="дата рождения" class="form-control" name="date_of_birth">
                 <h4 style="text-align: center;">Почтовый ящик</h4>
                 {{ form.email }}<br>
-
+                <h4 style="text-align: center;">аватар</h4>
+                {{ form.avatar }}<br>
                 <button class="btn btn-success" type="submit">Сохранить</button>
             </form>
         </div>

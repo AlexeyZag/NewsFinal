@@ -8,6 +8,7 @@ from django.views.generic import TemplateView
 from .models import CustomUser
 from .forms import EditForm
 from apps.posts.models import Post
+from django.contrib import messages
 
 
 class UserPage(LoginRequiredMixin, TemplateView):
@@ -43,11 +44,21 @@ def upgrade_me(request):
 
 class EditProfile(LoginRequiredMixin, UpdateView):
     form_class = EditForm
-    template_name = 'edit_profile.html'
+    template_name = 'users/edit_profile.html'
 
     def get_object(self, **kwargs):
         id = self.kwargs.get('pk')
         return CustomUser.objects.get(pk=id)
+
+    """def post(self, request, *args, **kwargs):
+        print(self.request.POST)
+        queryDict = self.request.POST
+        user = self.request.user
+        profile = CustomUser.objects.get(username=user)
+        profile.first_name = 'fff'
+        profile.save()
+        print(profile.first_name)
+        return redirect(f'/mypage/')"""
 
 
 from django.shortcuts import render
