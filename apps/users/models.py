@@ -7,7 +7,9 @@ class CustomUser(AbstractUser):
     date_of_birth = models.DateField(null=True, blank=True)
     def get_absolute_url(self):  # добавим абсолютный путь чтобы после создания нас перебрасывало на страницу с новостью
         return f'/mypage/'
-    def save(self):
+    class Meta:
+        db_table = 'auth_user'
+"""    def save(self):
         super().save()
 
         avatar = Image.open(self.avatar.path)
@@ -15,6 +17,5 @@ class CustomUser(AbstractUser):
         if avatar.height > 300 or avatar.width > 300:
             output_size = (300, 300)
             avatar.thumbnail(output_size)
-            avatar.save(self.avatar.path)
-    class Meta:
-        db_table = 'auth_user'
+            avatar.save(self.avatar.path)"""
+
