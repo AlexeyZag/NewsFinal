@@ -10,6 +10,10 @@ Post
     <h7>Текст:</h7><br />
         {{ post.text}}<br /><br />
     <h7>Автор: {{ post.author }}   </h7><br />
+{% for i in images %}
+<img class="" src="{{ i.image.url }}" alt="" style="width:600px;height:600px;">
+
+{% endfor %}
 {% if user not in post.response.all %}
 <form method="post">{% csrf_token %}
     <button type="submit" class="save" name="response">Откликнуться</button><br />
@@ -37,10 +41,7 @@ Post
 
     </form>
 
-{% for i in images %}
-<img class="" src="{{ i.image.url }}" alt="" style="width:600px;height:600px;">
 
-{% endfor %}
     {% elif user in likers %}
         <h7>Вам понравилась статья</h7><br>
     {% else %}
